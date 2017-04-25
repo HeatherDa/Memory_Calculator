@@ -61,8 +61,8 @@ namespace basic_calculator
             {
                 decimal s = Decimal.Parse(operand, System.Globalization.NumberStyles.Number);
                 c.MemoryStore(s);
-                MessageBox.Show("s is " + s +" memory has: "+c.Mem);
                 goBack = false;
+                label1.Text = "M";
             }
             
         }
@@ -107,6 +107,7 @@ namespace basic_calculator
         private void MC()
         {
             c.MemoryClear();
+            label1.Text = "";
             goBack = false;
         }
 
@@ -187,15 +188,31 @@ namespace basic_calculator
 
         private void Back()
         {
-            if (goBack)//allowed to go back if calculation has not been completed.
+            try
             {
-                if (display.Length > 0)
+                if (goBack)//allowed to go back if calculation has not been completed.
                 {
-                    display = display.Remove(display.Length - 1);//take last entry off
-                    operand = operand.Remove(display.Length - 1);
-                    txtDisplay.Text = display;
+                    if (operand.Length > 0)
+                    {
+                        display = display.Remove(display.Length - 1);//take last entry off
+                        operand = operand.Remove(display.Length - 1);
+                        txtDisplay.Text = display;
+                    }
+                    else if (op1 && operand.Length==0)//if op1 has been set and operand is empty, 
+                                                      //user wants to choose a different operation.  
+                                                      //Reverse setOp1: operand = op1, display = operand, 
+                                                      //next operation choice will trigger reassignment of op1, 
+                                                      //overwriting current value
+                    {
+                        c.Operation = "";
+                        prevClick = "B";
+                        operand = c.Op1.ToString();
+                        display = operand;
+                        op1 = false;
+                    }
                 }
             }
+            catch (Exception) { MessageBox.Show("You cannot use back right now","Exception"); }
         }
 
         private void Sqrt()

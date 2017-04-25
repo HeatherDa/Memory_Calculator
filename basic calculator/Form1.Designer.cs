@@ -73,7 +73,7 @@
             this.btnBack.TabIndex = 1;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            this.btnBack.Click += new System.EventHandler(this.btn_Handler);
             // 
             // btnClear
             // 
@@ -83,7 +83,7 @@
             this.btnClear.TabIndex = 2;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            this.btnClear.Click += new System.EventHandler(this.btn_Handler);
             // 
             // btn7
             // 
@@ -133,7 +133,7 @@
             this.btnSqrt.TabIndex = 7;
             this.btnSqrt.Text = "sqrt";
             this.btnSqrt.UseVisualStyleBackColor = true;
-            this.btnSqrt.Click += new System.EventHandler(this.Sqrt_Click);
+            this.btnSqrt.Click += new System.EventHandler(this.btn_Handler);
             // 
             // btnReciprocal
             // 
@@ -143,7 +143,7 @@
             this.btnReciprocal.TabIndex = 12;
             this.btnReciprocal.Text = "1/x";
             this.btnReciprocal.UseVisualStyleBackColor = true;
-            this.btnReciprocal.Click += new System.EventHandler(this.Reciprocal_Click);
+            this.btnReciprocal.Click += new System.EventHandler(this.btn_Handler);
             // 
             // btnMultiply
             // 

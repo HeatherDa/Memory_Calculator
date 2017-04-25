@@ -42,10 +42,14 @@ namespace basic_calculator
             else if (sender == btnSub) { prevClick = "-"; setOp1("-"); operand = ""; }
             else if (sender == btnAdd) { prevClick = "+"; setOp1("+"); operand = ""; }
             else if (sender == btnEquals) { Equals(); } //set Operand 2, calculate answer.
-            else if (sender == btnMC) MC(); 
-            else if (sender == btnMPlus) MPlus(); 
+            else if (sender == btnMC) MC();
+            else if (sender == btnMPlus) MPlus();
             else if (sender == btnMR) MR();
-            else if (sender == btnMS) MS() ;
+            else if (sender == btnMS) MS();
+            else if (sender == btnBack) Back();
+            else if (sender == btnClear) Clear();
+            else if (sender == btnReciprocal) Reciprocal();
+            else if (sender == btnSqrt) Sqrt();
 
                 goBack = true;
             txtDisplay.Text = display;
@@ -141,7 +145,7 @@ namespace basic_calculator
                 
                 return true;
             }
-            catch (FormatException)
+            catch (Exception)
             {
                 MessageBox.Show("Please enter a number.", "Entry Error");
                 return false;
@@ -171,7 +175,7 @@ namespace basic_calculator
             }
             catch (OverflowException) { MessageBox.Show("The Answer is too big"); }
         }
-        private void btnClear_Click(object sender, EventArgs e)
+        private void Clear()
         {
             txtDisplay.Text = "";
             display = "";
@@ -181,7 +185,7 @@ namespace basic_calculator
             op1 = false;
         }
 
-        private void btnBack_Click(object sender, EventArgs e)
+        private void Back()
         {
             if (goBack)//allowed to go back if calculation has not been completed.
             {
@@ -194,7 +198,7 @@ namespace basic_calculator
             }
         }
 
-        private void Sqrt_Click(object sender, EventArgs e)
+        private void Sqrt()
         {
             if (dataValidationA())
             {
@@ -209,7 +213,7 @@ namespace basic_calculator
                 else MessageBox.Show("Cannot take the squareroot of a negative number.");
             }
         }
-        private void Reciprocal_Click(object sender, EventArgs e)
+        private void Reciprocal()
         {
             if (dataValidationA()&& operand !="0")
             {
@@ -235,10 +239,7 @@ namespace basic_calculator
             else MessageBox.Show("Please enter an operator and a second operand.");
         }
 
-        private bool AllSet()
-        {
-            throw new NotImplementedException();
-        }
+       
 
         private bool isNotNull()
         {

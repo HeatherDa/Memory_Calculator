@@ -13,7 +13,7 @@ namespace basic_calculator
     public partial class Form1 : Form
     {
         string display = "";
-        Calculator c = new Calculator();
+        Memory c = new Memory();
         bool goBack = true;// whether go back is allowed or not
         string prevClick= "";
         string operand = "";
@@ -41,11 +41,70 @@ namespace basic_calculator
             else if (sender == btnMultiply) { prevClick = "*"; setOp1("*"); operand = ""; }
             else if (sender == btnSub) { prevClick = "-"; setOp1("-"); operand = ""; }
             else if (sender == btnAdd) { prevClick = "+"; setOp1("+"); operand = ""; }
-            else if (sender == btnEquals) { Equals();} //set Operand 2, calculate answer.
+            else if (sender == btnEquals) { Equals(); } //set Operand 2, calculate answer.
+            else if (sender == btnMC) MC(); 
+            else if (sender == btnMPlus) MPlus(); 
+            else if (sender == btnMR) MR();
+            else if (sender == btnMS) MS() ;
 
-            goBack = true;
+                goBack = true;
             txtDisplay.Text = display;
             }
+
+        private void MS()
+        {
+            if (dataValidationA())
+            {
+                decimal s = Decimal.Parse(operand, System.Globalization.NumberStyles.Number);
+                c.MemoryStore(s);
+                MessageBox.Show("s is " + s +" memory has: "+c.Mem);
+                goBack = false;
+            }
+            
+        }
+
+        private void MR()// 
+        {
+            if (op1 && prevClick== "=")
+            {
+                c.Op1 = c.MemoryRecall();
+                operand = c.MemoryRecall().ToString();
+                display = operand;
+                goBack = false;
+            }
+            else if(op1)
+            {
+                c.Op2 = c.MemoryRecall();//if operator 1 has been set, set operator 2 to memory value
+                operand = c.MemoryRecall().ToString();
+                display = c.Op1.ToString() + c.Operation.ToString() + c.Op2.ToString();
+                goBack = false;
+            }
+            else
+            {
+                c.Op1 = c.MemoryRecall();
+                operand = c.MemoryRecall().ToString();
+                display = operand;
+                goBack = false;
+            }
+
+            //operand = c.Mem.ToString();//where should these two lines of code be? 
+            //display = display + operand;
+        }
+
+        private void MPlus()
+        {
+            if (dataValidationA())
+            {
+                c.MemoryAdd(Decimal.Parse(operand, System.Globalization.NumberStyles.Number));
+                goBack = false;
+            }
+        }
+
+        private void MC()
+        {
+            c.MemoryClear();
+            goBack = false;
+        }
 
         private string sign1()
         {
@@ -57,6 +116,7 @@ namespace basic_calculator
                 op = op * -1;
                 display = display.Replace(operand, op.ToString());//replace previous operand with new one
                 operand = op.ToString();
+                goBack = false;//undo by clicking sign button again
             }
 
             return operand;

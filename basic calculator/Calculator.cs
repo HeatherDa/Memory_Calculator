@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace basic_calculator
 {
-    class Calculator
+    public class Calculator
     {
         private string operation = "";//operator
         private decimal op1 = 0m;

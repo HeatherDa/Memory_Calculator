@@ -14,7 +14,7 @@ namespace basic_calculator
     {
         string display = "";
         Calculator c = new Calculator();
-        bool goBack = true;//whether go back is allowed or not
+        bool goBack = true;// whether go back is allowed or not
         string prevClick= "";
         string operand = "";
         bool op1=false;//test for whether op1 has been set
